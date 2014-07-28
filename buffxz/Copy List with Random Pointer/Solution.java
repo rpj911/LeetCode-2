@@ -30,6 +30,7 @@ public class Solution {
             } else {
                 copyNode.random = cur.random.next;
             }
+            cur = cur.next.next;
         }
         
         // Recover
