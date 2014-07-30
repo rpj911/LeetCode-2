@@ -15,8 +15,8 @@ public class Solution {
             return head;
         }
         
-        if (head == null) {
-            return null;
+        if (head == null || head.next == null) {
+            return head;
         }
         
         ListNode front = new ListNode(-1);
@@ -43,10 +43,10 @@ public class Solution {
             ListNode cur = prev.next;
             count = k - 1;
             while (count > 0) {
-                ListNode temp = cur.next.next;
-                cur.next.next = prev.next;
+                ListNode temp = prev.next;
                 prev.next = cur.next;
-                cur.next = temp;
+                cur.next = cur.next.next;
+                prev.next.next = temp;
                 count--;
             }
             front = cur;
