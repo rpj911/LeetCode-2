@@ -1,0 +1,47 @@
+public class Solution {
+    public int[] searchRange(int[] A, int target) {
+        int[] res = new int[2];
+        
+        int left = 0;
+        int right = A.length - 1;
+        
+        int front = -1;
+        boolean flag = false;
+        while (left <= right) {
+            front = (left + right) / 2;
+            if (A[front] < target) {
+                left = front + 1;
+            } else if (A[front] > target) {
+                right = front - 1;
+            } else {
+                flag = true;
+                if (front == 0 || A[front - 1] != target) break;
+                right = front - 1;
+            }
+        }
+        
+        if (!flag) {
+            res[0] = -1;
+            res[1] = -1;
+            return res;
+        }
+        
+        int back = -1;
+        left = front;
+        right = A.length - 1;
+        while (left <= right) {
+            back = (left + right) / 2;
+            if (A[back] > target) {
+                right = back - 1;
+            } else {
+                if (back == A.length - 1 || A[back + 1] != target) break;
+                left = back + 1;
+            }
+        }
+        
+        res[0] = front;
+        res[1] = back;
+        
+        return res;
+    }
+}
